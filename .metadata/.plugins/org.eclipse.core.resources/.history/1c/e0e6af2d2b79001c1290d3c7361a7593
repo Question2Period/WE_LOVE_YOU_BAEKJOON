@@ -1,0 +1,26 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class BaekJoon6131 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = br.read();
+		int A = 0;
+		int B = 0;
+		int count = 0;
+		for(A=1;A<500;A++) {
+			for(B=2;B<500&&B<A;B++) {
+				if(A*A==B*B+N) {
+					count++;
+				}
+				else {
+					break;
+				}
+			}
+		}
+		System.out.println(count);
+	}
+}
