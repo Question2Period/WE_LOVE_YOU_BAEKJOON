@@ -1,0 +1,11 @@
+import java.io.IOException;
+
+public class BaekJoon10172 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		System.out.println("|\\_/|");
+	}
+}
+
+

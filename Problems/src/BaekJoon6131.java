@@ -1,24 +1,33 @@
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.util.StringTokenizer;
 public class BaekJoon6131 {
 
 	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
-		int A = 1;
-		int B = 1;
-		int count = 0;
-		for(A=1; A<=500;A++) {
-			for(B=1;B<A;B++) {
-				if(A*A==B*B+N) {		
-					count++;
-				}
-			}
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+		int n = Integer.parseInt(st.nextToken());
+		int w = Integer.parseInt(st.nextToken());
+		if(a==b||(w==0 && n==0)) {
+			System.out.println("1 1");
 		}
-		System.out.println(count);
+		else {
+			int x = (w-b*n)/(a-b);
+			int y = (a*n-w)/(a-b);
+			if(x<=0||y<=0){
+				System.out.println("-1");
+			}
+			else {
+				System.out.printf("%d %d",x,y);
+			}
+			br.close();
+		}
 	}
 }
-//l
+
