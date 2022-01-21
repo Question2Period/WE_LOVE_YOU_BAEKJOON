@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 public class BaekJoon1822 {
 
@@ -42,15 +43,7 @@ public class BaekJoon1822 {
 			System.out.println("0");
 		}
 		else {
-			for(int i=0; i<count-1;i++) {
-				for(int j=0; j<count-1;j++) {
-					if(answer[j]>answer[j+1]) {
-						temp = answer[j];
-						answer[j] = answer[j+1];
-						answer[j+1] = temp;
-					}
-				}
-			}
+			Arrays.sort(answer);
 			System.out.println(count);
 			for(int k=0;k<count;k++) {
 				System.out.print(answer[k]+" ");
