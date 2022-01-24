@@ -36,7 +36,7 @@ public class BaekJoon1822 {
 		Arrays.sort(B);
 		for(int i=0;i<b;i++) { //A와 B를 탐색하면서 같은 값 찾을시 0으로 바꿔줌.
 			if(Arrays.binarySearch(A, B[i])>=0) {
-				answer[Arrays.binarySearch(A, B[i])]=Arrays.binarySearch(A, B[i]);
+				answer[i]=Arrays.binarySearch(A, B[i]);
 				count--;
 			}
 
