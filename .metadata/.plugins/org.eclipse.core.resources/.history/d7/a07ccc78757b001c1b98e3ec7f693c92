@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.StringTokenizer;
+public class BaekJoon2675 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int N = Integer.parseInt(br.readLine());
+		for(int i=0;i<N;i++) {
+			br.readLine();
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int repeat = Integer.parseInt(st.nextToken());
+			for(int j=0;j<st.nextToken().length();j++) {
+				for(int k=0;k<repeat;k++) {
+					System.out.println(st.nextToken().charAt(j));
+				}
+			}
+		}
+
+	}
+
+}

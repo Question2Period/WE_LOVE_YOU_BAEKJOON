@@ -1,0 +1,9 @@
+import java.io.*;
+public class BaekJoon2557 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		System.out.println("Hello World!");
+	}
+
+}

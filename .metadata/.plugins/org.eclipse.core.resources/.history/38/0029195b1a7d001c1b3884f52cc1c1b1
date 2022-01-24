@@ -1,0 +1,49 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+public class BaekJoon1822 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		//		System.setIn(new FileInputStream("C:\\ssafy\\BaekJoon\\Problems\\src\\input.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int a = Integer.parseInt(st.nextToken()); //집합 A의 원소 개수
+		int b = Integer.parseInt(st.nextToken()); //집합 B의 원소 개수
+		int count = a; // 집합 공통 요소 세는 변수
+		int A[]=new int[a]; // 집합 A 배열
+		int B[]=new int[b]; // 집합 B 배열
+		st = new StringTokenizer(br.readLine());
+		for(int i=0;i<a;i++) { //집합 A 속 채우기
+			A[i]=Integer.parseInt(st.nextToken());
+		}
+		Arrays.sort(A);
+		st = new StringTokenizer(br.readLine());
+		for(int i=0;i<b;i++) {//집합 B 속 채우기		
+			B[i]=Integer.parseInt(st.nextToken());
+		}
+		for(int i=0;i<a;i++) {
+			for(int j=0;j<b;j++) {
+				if(A[i]==B[j]) {							
+					A[i]=0;
+					count--;
+					break;
+				}
+			} 
+		}
+		if(count==0) {
+			System.out.println('0');
+		}
+		else {
+			System.out.println(count);
+			for(int j =0; j<a;j++) {
+				if(A[j]!=0){
+				System.out.print(A[j]+" ");
+				}
+			}
+		}
+	}
+}

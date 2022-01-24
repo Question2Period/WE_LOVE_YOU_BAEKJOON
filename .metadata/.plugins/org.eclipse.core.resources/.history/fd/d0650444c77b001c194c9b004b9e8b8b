@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+public class BaekJoon4153 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String str=br.readLine();
+		while(str.equals("0 0 0")){
+			StringTokenizer st = new StringTokenizer(str);
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+			int z = Integer.parseInt(st.nextToken());
+			if(x*x+y*y==z*z) {
+				System.out.println("right");
+			}
+			else {
+				System.out.println("wrong");
+			}
+		}
+	}
+
+}

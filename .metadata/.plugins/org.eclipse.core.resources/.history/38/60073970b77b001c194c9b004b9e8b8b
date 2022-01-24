@@ -1,0 +1,14 @@
+import java.io.*;
+import java.util.*;
+public class BaekJoon2884 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+		int x = Math.min(a, b);
+		System.out.println(x/100+x%100/10*10+x%100%10*100);
+	}
+}

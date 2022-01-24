@@ -1,0 +1,24 @@
+import java.io.*;
+import java.util.StringTokenizer;
+public class BaekJoon2577 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int A = Integer.parseInt(br.readLine());
+		int B = Integer.parseInt(br.readLine());
+		int C = Integer.parseInt(br.readLine());
+		int arr[]= new int[1000];
+		String str = "(A*B*C)";
+		StringTokenizer st = new StringTokenizer(str);
+		while(st.nextToken()!="") {
+			for(int i=0;i<str.length();i++) {
+				arr[Integer.parseInt(st.nextToken())]++;
+			}
+		}
+		for(int i=0;i<str.length();i++) {
+			System.out.println(arr[i]);
+		}
+	}
+
+}
