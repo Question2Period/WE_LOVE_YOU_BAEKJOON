@@ -1,7 +1,7 @@
 package Silver;
 import java.io.*;
 import java.util.*;
-public class BaekJoon11650 {
+public class BaekJoon10814 {
 
 	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
