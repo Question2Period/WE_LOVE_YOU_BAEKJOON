@@ -1,50 +1,38 @@
 package Gold;
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
 public class BaekJoon2467 {
 
 	public static void main(String[] args) throws IOException{
-		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
-		int[] arr = new int[N];
+		int n = Integer.parseInt(br.readLine());
+		
+		long[] arr = new long[n];
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		for(int i = 0; i<N; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
+		for(int i=0; i<n; i++) {
+			arr[i] = Long.parseLong(st.nextToken());
 		}
-		Arrays.sort(arr);
-		int p1 = 0;
-		int p2 = N-1;
-		int sum = 0;
-		int answer1 = 0;
-		int answer2 = 0;
-		int min = Integer.MAX_VALUE;
-		while(p1!=p2) {
-			sum = arr[p1]+arr[p2];	
-			if(sum>=0 ) {
-				p2--;
-				continue;
+		
+		int left =0;
+		int right =n-1;
+		int ml =0, mr = 0;
+		long min = Long.MAX_VALUE;
+		while(left<right) {
+			long sum = arr[left]+arr[right];
+			if(min > Math.abs(sum)) {
+				min = Math.abs(sum);
+				ml = left; mr = right;
 			}
-			else if(sum<0) {
-				p1++;
-				continue;
+			if(sum>=0) {
+				right--;	
+			}else {
+				left++;
 			}
-			if(Math.abs(sum)<Math.abs(min)) {
-			min = sum;
-			answer1 = p1;
-			answer2 = p2;
-			}
-
-		}	
-		System.out.print(arr[p1]+" "+arr[p2]);
+		}
+		System.out.println(arr[ml] +" "+arr[mr]);
 	}
-
 }
-//else {
-//	if(p1==p2) {
-//		continue;
-//	}
-//	answer1 = p1;
-//	answer2 = p2;
-//	break;
-//}
