@@ -6,7 +6,7 @@ public class BaekJoon2961 {
 	public static int N;
 	public static int S;
 	public static int B;
-	public static int Min;
+	public static int Min=Integer.MAX_VALUE;
 	public static int MulS=1;
 	public static int SumB;
 	public static List<int[]> arr;
@@ -27,23 +27,16 @@ public class BaekJoon2961 {
 			B = Integer.parseInt(st.nextToken());
 			arr.add(new int[]{S,B});
 		}
-		difference(0,Integer.MAX_VALUE);
+		difference(0,0,1,0);
 		System.out.println(Min);
-
 	}
-	public static void difference(int index,int Min) {
-		if(index == N) {
-			Min = Math.min(Math.abs(MulS-SumB),Min);
-			MulS = 1;
-			SumB = 0;
-		}
-		for(int i = 0; i< N; i++) {
-			if(Visited[i]) continue;
-			Visited[i] = true;
-			MulS *= arr.get(i)[0];
-			SumB += arr.get(i)[1];
-			difference(index+1,Min);
-			Visited[i] = false;
-		}
+	public static void difference(int index,int cnt,int MulS, int SumB) {
+		
+		if(cnt!=0) Min = Math.min(Math.abs(MulS-SumB),Min);
+		if(index == N) return;
+		
+			difference(index+1,cnt+1,MulS*arr.get(index)[0],SumB+arr.get(index)[1]);
+			difference(index+1,cnt,MulS,SumB);
+
 	}
 }
