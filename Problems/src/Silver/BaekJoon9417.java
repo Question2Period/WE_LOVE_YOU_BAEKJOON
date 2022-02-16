@@ -7,7 +7,6 @@ public class BaekJoon9417 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		List<Integer> list = new ArrayList<>();
-		int count = 0;
 		int zero = 0;
 		int N = Integer.parseInt(br.readLine());
 		for(int i = 0; i<N; i++) {
@@ -19,14 +18,11 @@ public class BaekJoon9417 {
 					zero++;
 				}
 			}
-			if(zero>list.size()-2&&list.size()>2) {
+			if(zero>list.size()-2 &&list.size()>1) {
 				System.out.println(0); break;
 			}
 			else {
 				Collections.sort(list);
-				if(count==list.size()) {
-					Collections.reverse(list);
-				}
 				int Max = list.get(list.size()-2);
 				for(int x = Max;x>0; x--) {
 					if(x==1)  {
