@@ -6,47 +6,33 @@ public class BaekJoon9417 {
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
-		List<Integer> list = new ArrayList<>();
-		int zero = 0;
+		int temp = 0;
 		int N = Integer.parseInt(br.readLine());
+		int[] arr;
 		for(int i = 0; i<N; i++) {
-			int flag=  0;
+			int max = Integer.MIN_VALUE;
 			st = new StringTokenizer(br.readLine());
-			for(int j= 0; st.hasMoreTokens(); j++) {
-				list.add(Math.abs(Integer.parseInt(st.nextToken())));
-				if(list.get(j)==0) {
-					zero++;
+			int M = st.countTokens();
+			arr = new int[M];
+			for(int j= 0; j<M; j++) {
+				arr[j] = Integer.parseInt(st.nextToken());
+			}
+			for(int k = 0; k<M-1; k++) {
+				for(int z = 1; k+z<M; z++) {
+					int a = Math.max(arr[k], arr[k+z]);
+					int b = Math.min(arr[k], arr[k+z]);
+					if(a%b==0) {max=Math.max(max, Math.abs(b)); continue;
+					}
+					while(a%b>0) {
+						a%=b;
+						temp = a;
+						a = b;
+						b = temp;
+					}
+					max = Math.max(max, Math.abs(b));
 				}
 			}
-			if(zero>list.size()-2 &&list.size()>1) {
-				System.out.println(0); break;
-			}
-			else {
-				Collections.sort(list);
-				int Max = list.get(list.size()-2);
-				for(int x = Max;x>0; x--) {
-					if(x==1)  {
-						System.out.println(1);break;
-					}
-
-
-					for(int y= 0; y<list.size()-1; y++) {
-
-						if(list.get(y)<x) {
-							continue;
-						}
-						if(list.get(y)%x==0 && list.get(list.size()-1)%x==0) {
-							System.out.println(x);
-							flag = 1;
-							break;
-						}
-					}
-					if(flag==1) {
-						break;
-					}
-				}
-				list.clear();
-			}
+			System.out.println(max);
 		}
 	}
 
