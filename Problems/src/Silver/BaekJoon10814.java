@@ -14,7 +14,9 @@ public class BaekJoon10814 {
 			String name = st.nextToken();
 			arr[i][1] = age;
 			arr[i][2] = name;
+		
 		}
+		arr[0][1] = "0";
 		Arrays.sort(arr, new Comparator<String[]>() {
 
 			@Override
@@ -24,6 +26,7 @@ public class BaekJoon10814 {
 			}
 			
 		});
+		
 		for(int k = 1; k<=N; k++) {
 			System.out.println(arr[k][1]+" "+arr[k][2]);
 		}		
