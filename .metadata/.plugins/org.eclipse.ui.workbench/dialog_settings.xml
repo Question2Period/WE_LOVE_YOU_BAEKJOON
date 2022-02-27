@@ -10,22 +10,27 @@
 		<list key="textEntries">
 			<item value="1"/>
 			<item value="1"/>
+			<item value="2"/>
 			<item value="1"/>
 		</list>
 		<list key="orderedElements">
+			<item value="org.eclipse.debug.ui.VariableView"/>
+			<item value="org.eclipse.jdt.debug.ui.JavaDebugPreferencePage"/>
 			<item value="org.eclipse.debug.ui.ExpressionView"/>
 			<item value="org.eclipse.ui.window.closeAllPerspectives"/>
-			<item value="org.eclipse.datatools.sqltools.debugger.perspectives.DebuggerPerspective"/>
 		</list>
 		<list key="orderedProviders">
 			<item value="org.eclipse.e4.ui.parts"/>
+			<item value="org.eclipse.ui.preferences"/>
+			<item value="org.eclipse.e4.ui.parts"/>
 			<item value="org.eclipse.ui.commands"/>
-			<item value="org.eclipse.ui.perspectives"/>
 		</list>
 		<list key="textArray">
-			<item value="express"/>
-			<item value="close"/>
+			<item value="vari"/>
 			<item value="debug"/>
+			<item value="express"/>
+			<item value="de"/>
+			<item value="close"/>
 		</list>
 	</section>
 	<section name="NewWizardAction">
