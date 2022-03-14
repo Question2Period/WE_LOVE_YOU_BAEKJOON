@@ -2,10 +2,10 @@ package Silver;
 import java.io.*;
 import java.util.*;
 public class BaekJoon2108 {
-	public static int sum,dif,count,index1,index2,max1,max2,most;
+	public static int sum,dif,max,most;
+	public static ArrayList<Integer>list = new ArrayList<>();
 	public static int[] arr;
-	public static int[] countingplus = new int[4001];
-	public static int[] countingminus = new int[4001];
+	public static int[] counting = new int[8002];
 
 	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
@@ -18,41 +18,31 @@ public class BaekJoon2108 {
 			num=Integer.parseInt(br.readLine());
 			arr[i] = num;
 			sum+=num;
-			if(num>=0)countingplus[num]++;
-			else countingminus[-num]++;
+			if(num>=0)counting[num+4000]++;
+			else counting[-num-1]++;
 		}
-		for(int i =0; i<4001; i++) {
-			if(max1>countingplus[i]) {
-				max1 = countingplus[i];
-				index1 = i;
+		for(int i = 0; i<8001; i++) {
+			if(counting[i]>max) {
+				max = counting[i];
 			}
 		}
-		if(index1!=4000) {
-			for(int i = index1+1; i<4001; i++) {
-				if(max1==countingplus[i]) {
-					index1 = i;
-					break;
-				}
+		for(int i = 0; i<8001; i++) {
+			if(counting[i]==max) {
+				if(i>=4000)list.add(i-4000);
+				else list.add(-i-1);
 			}
 		}
-		for(int i =0; i<4001; i++) {
-			if(max2>countingminus[i]) {
-				max2 = countingminus[i];
-				index2 = i;
-			}
+
+		if(list.size()==1) {
+			most = list.get(0);
 		}
-		if(index2!=1) {
-			for(int i = index2-1; i>0; i--) {
-				if(max2==countingminus[i]) {
-					index2 = i;
-					break;
-				}
-			}
+		else {
+			Collections.sort(list);
+			most = list.get(1);
 		}
-		if(max1>max2)most = index1;
-		else most = -index2;
 		Arrays.sort(arr);
-		System.out.printf("%.0f\n",((double)sum/(double)N));
+		double answer = (double)sum/N;
+		System.out.println(Math.round(answer));
 		System.out.println(arr[N/2]);
 		System.out.println(most);
 		System.out.println(arr[N-1]-arr[0]);
