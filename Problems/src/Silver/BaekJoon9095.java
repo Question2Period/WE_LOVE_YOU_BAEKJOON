@@ -17,12 +17,12 @@ public class BaekJoon9095 {
 	}
 
 	public static long recur(int sum) {
-		long time = 0;
+		int time = 0;
 		if(sum<0)return 0;
 		if(sum==0) return 1;
 		if(dp[sum]!=-1)return dp[sum];
 		for(int i = 1; i<=3; i++)time += (recur(sum-i));
-		dp[sum]=(time%1000000009);
+		dp[sum]=time;
 		return dp[sum];
 	}
 	

@@ -9,25 +9,22 @@ public class BaekJoon17626 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		n = Integer.parseInt(br.readLine());
 		dp = new int[n+1];
+		for(int i= 1; i*i<=n; i++)dp[i*i] = 1;
 		Arrays.fill(dp, -1);
-        int[] dp = new int[n+1];
-        dp[1] = 1;
- 
-        int min = 0;
-        for (int i = 2; i <= n; i++) {
-            min = Integer.MAX_VALUE;
-            
-            // i에서 i보다 작은 제곱수에서 뺀 dp[i - j * j] 중
-            // 최소를 택한다.
-            for (int j = 1; j * j <= i; j++) {
-                int temp = i - j * j;
-                min = Math.min(min, dp[temp]);
-            }
- 
-            dp[i] = min + 1; // 그리고 1을 더해준다.
-        }
+		count(n);
 		System.out.println(dp[n]);
 	}
 	
-
+	public static int count(int x) { //몇개의 수가 더해졌는지 리턴
+		int ret = 100000;
+		if(x==0)return 0;
+		if(x<0)return 100000;
+		if(dp[x]!=-1)return dp[x];
+		for(int i = (int)Math.sqrt(x); i>=1; i--) {
+			ret = Math.min(count(x-i*i)+1,ret);
+			dp[x] = ret;
+		}
+		return dp[x];
+		
+	}
 }
