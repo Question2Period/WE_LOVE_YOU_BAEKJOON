@@ -8,26 +8,18 @@ public class BaekJoon2231 {
 
 	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
-//		System.setIn(new FileInputStream("C:\\ssafy\\BaekJoon\\Problems\\src\\input2869.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int T = Integer.parseInt(br.readLine());
-		int x = 0;
-		int y = 0;
-		for(int i=0;i<T;i++) {
-		String str = br.readLine();
-		StringTokenizer st = new StringTokenizer(str);
-		int H = Integer.parseInt(st.nextToken());
-		int W = Integer.parseInt(st.nextToken());
-		int N = Integer.parseInt(st.nextToken());
-		if(N%H==0) {
-		x = N/H;
-		y = H*100;
+		int N = Integer.parseInt(br.readLine());
+		int flag = 0;
+		for(int i= 1; i<=1000000; i++) {
+			String str= Integer.toString(i);
+			int sum = 0;
+			for(int j = 0; j<str.length(); j++)sum+=(str.charAt(j)-'0');
+			if(Integer.parseInt(str)+sum!=N)continue;
+			System.out.println(str);
+			flag=1;
+			break;
 		}
-		else {
-		x = (N/H)+1;	
-		y = (N%H)*100;
-		}
-		System.out.println(x+y);
-		}
+		if(flag==0)System.out.println(0);
 	}
 }
