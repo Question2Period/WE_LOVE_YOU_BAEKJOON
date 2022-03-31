@@ -2,115 +2,183 @@ package Gold;
 import java.io.*;
 import java.util.*;
 public class BaekJoon15683 {
-	public static int[][] arr;
-	public static int N,M,square,Max;
-	
+	public static int min,N,M,cnt;
+	public static List<int[]> direction;//
+	public static int[][]arr; //입력 배열
+	public static int[][]ex; // 입력 배열 복사
+	public static Queue<int[]>Q; //cctv 위치 담을 큐
 	public static void main(String[] args) throws IOException{
-		// TODO Auto-generated method stub
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-	}
-	
-	public static void Gamsi(int x, int y, int sum) {
-		if(x==N && y==M) {
-			square -= Max;
-			return;
-		}
-		if(x>N) Gamsi(x-N,y,sum);
-		else if(y>M) Gamsi(x,y-M,sum);
-		
-		if(arr[x][y]==0) Gamsi(x+1,y,sum+1);
-		else if(arr[x][y]==1) {
-			while((x<=N && x>=1)|(y<=M && y>=1)) {
-				switch
+		StringTokenizer st;
+		st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());//행
+		M = Integer.parseInt(st.nextToken());//열
+		arr = new int[N+1][M+1];
+		for(int i =1; i<=N; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j =1; j<=M; j++) {
+				arr[i][j] = Integer.parseInt(st.nextToken());
+				if(arr[i][j]==0||arr[i][j]==6)continue;
 			}
 		}
+		min = Integer.MAX_VALUE;
+		direction = new ArrayList<>();
+		for(int x = 1; x<=4;x++)
+			for(int y = 1; y<=2; y++)
+				for(int z = 1; z<=4; z++)
+					for(int w = 1; w<=4; w++) {
+						direction.add(new int[] {x,y,z,w});
+					}
+		for(int a = 0; a<128; a++) {
+			cnt=0;
+			Q = new LinkedList<>();
+			ex = new int[N+1][M+1];
+			for(int i =1; i<=N; i++)
+				for(int j=1; j<=M; j++) {
+					ex[i][j] = arr[i][j];
+					if(arr[i][j]==0||arr[i][j]==6)continue;
+					Q.offer(new int[] {i,j,arr[i][j]});
+				}
+			
+				while(!Q.isEmpty()) {
+					int x = Q.peek()[0];
+					int y = Q.peek()[1];
+					int TV = Q.peek()[2];
+					Q.poll();
+					switch (TV) {
+					case 1:
+						int a1 = direction.get(a)[0];
+						cctv1(x,y,a1);
+						break;
+					case 2:
+						cctv2(x,y,direction.get(a)[1]);
+						break;
+					case 3:
+						cctv3(x,y,direction.get(a)[2]);
+						break;
+					case 4:
+						cctv4(x,y,direction.get(a)[3]);
+						break;
+					case 5:
+						cctv5(x,y);
+						break;
+					}
+				}
+			for(int i =1; i<=N; i++)
+				for(int j=1; j<=M; j++) if(ex[i][j]!=-1)cnt++;			
+			min = Math.min(cnt, min);
+		}
+		System.out.println(min);
 	}
-	
-	public static int check(int x, int y,int CCTV) {// 0:좌 1:상 2:우 3:하
-		int direction=0;
-		int Left = left(x,y);
-		int Right = right(x,y);
-		int Top = top(x,y);
-		int Bottom = bottom(x,y);
-		int a;
-		int b;
-		switch (CCTV) {
-		case 1:
-			a = Math.max(Left, Right);
-			b = Math.max(Top, Bottom);
-			direction = Math.max(a, b);
-			if(direction==Left) direction=0;
-			else if(direction==Top)direction=1;
-			else if(direction==Right)direction=2;
-			else direction=3;
+
+	public static void cctv1(int x, int y, int dir) {
+		switch (dir) {
+		case 1: //윗방향
+			while(true) {
+				int ax = x-1;
+				if(ax<1)break;
+				if(ex[ax][y]==6)break;
+				if(ex[ax][y]<1) {
+					ex[ax][y]=-1;
+				}
+				x=ax;
+			}
+			break;			
+		case 2: //오른쪽
+			while(true) {
+				int ay = y+1;
+				if(ay>M)break;
+				if(ex[x][ay]==6)break;
+				if(ex[x][ay]<1)ex[x][ay]=-1;
+				y=ay;
+			}
 			break;
+		case 3: //아래
+			while(true) {
+				int ax = x+1;
+				if(ax>N)break;
+				if(ex[ax][y]==6)break;
+				if(ex[ax][y]<1)ex[ax][y]=-1;
+				y=ax;
+			}
+			break;
+		case 4:
+			while(true) {//왼쪽
+				int ay = y-1;
+				if(ay<1)break;
+				if(ex[x][ay]==6)break;
+				if(ex[x][ay]<1)ex[x][ay]=-1;
+				y=ay;
+			}
+			break;
+		}
+	}
+
+	public static void cctv2(int x, int y, int dir) {
+		switch (dir) {
+		case 1:
+			cctv1(x,y,1);
+			cctv1(x,y,3);
+			break;		
 		case 2:
-			a=Left+Right;
-			b=Top+Bottom;
-			direction = Math.max(a, b);	
-			if(direction==Left+Right) direction=0;
-			else if(direction==Top+Bottom)direction=1;
+			cctv1(x,y,2);
+			cctv1(x,y,4);
+			break;
+		}
+	}
+
+	public static void cctv3(int x, int y, int dir) {
+		switch (dir) {
+		case 1:
+			cctv1(x,y,1);
+			cctv1(x,y,2);
+			break;			
+		case 2:
+			cctv1(x,y,2);
+			cctv1(x,y,3);
 			break;
 		case 3:
-			a = Math.max(Top+Right, Right+Bottom);
-			b = Math.max(Bottom+Left, Left+Top);
-			direction = Math.max(a, b);
-			if(direction==Top+Right) direction=0;
-			else if(direction==Right+Bottom)direction=1;
-			else if(direction==Bottom+Left)direction=2;
-			else if(direction==Left+Top)direction=3;
+			cctv1(x,y,3);
+			cctv1(x,y,4);
 			break;
-
 		case 4:
-			a = Math.max(Top+Right+Bottom, Right+Bottom+Left);
-			b = Math.max(Bottom+Left+Top, Left+Top+Right);
-			direction = Math.max(a, b);
-			if(direction==Top+Right+Bottom) direction=0;
-			else if(direction==Right+Bottom+Left)direction=1;
-			else if(direction==Bottom+Left+Top)direction=2;
-			else if(direction==Left+Top+Right)direction=3;
+			cctv1(x,y,4);
+			cctv1(x,y,1);
 			break;
 		}
-		return direction;
 	}
-	
-	
-	
-	public static int left(int x, int y) {
-		int result = 0;
-		while(x>=1) {
-			if(arr[x][y]==0) result++;
-			else if(arr[x][y]==6)break;
-			x--;
+
+	public static void cctv4(int x, int y, int dir) {
+		switch (dir) {
+		case 1:
+			cctv1(x,y,1);
+			cctv1(x,y,2);
+			cctv1(x,y,3);
+			break;		
+		case 2:
+			cctv1(x,y,2);
+			cctv1(x,y,3);
+			cctv1(x,y,4);
+			break;				
+		case 3:
+			cctv1(x,y,3);
+			cctv1(x,y,4);
+			cctv1(x,y,1);
+			break;		
+		case 4:
+			cctv1(x,y,4);
+			cctv1(x,y,1);
+			cctv1(x,y,2);
+			break;
 		}
-		return result;
 	}
-	public static int right(int x, int y) {
-		int result = 0;
-		while(x<=N) {
-			if(arr[x][y]==0) result++;
-			else if(arr[x][y]==6)break;
-			x++;
-		}
-		return result;
+
+	public static void cctv5(int x, int y) {		
+		cctv1(x,y,1); //상
+		cctv1(x,y,2); //우
+		cctv1(x,y,3); //하
+		cctv1(x,y,4); //좌
 	}
-	public static int top(int x, int y) {
-		int result = 0;
-		while(y>=1) {
-			if(arr[x][y]==0) result++;
-			else if(arr[x][y]==6)break;
-			y--;
-		}
-		return result;
-	}
-	public static int bottom(int x, int y) {
-		int result = 0;
-		while(y<=M) {
-			if(arr[x][y]==0) result++;
-			else if(arr[x][y]==6)break;
-			y++;
-		}
-		return result;
-	}
+
 }

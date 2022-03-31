@@ -8,26 +8,22 @@ public class BaekJoon18310 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		int[] arr = new int[N];
-		int sum = 0;
-		int temp = 0;
-		int Min = Integer.MAX_VALUE;
+		int sum1 = 0;
+		int sum2 = 0;
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i =0; i<N; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
-			sum+=arr[i];
 		}
 		Arrays.sort(arr);
-		sum/=N;
-		for(int i = 0; arr[i]<sum+1; i++) {
-			for(int j = 0; j<N;j++) {
-				temp+=Math.abs(arr[j]-arr[i]);
+		if(N%2==0) {
+			for(int i = 0; i<N; i++) {
+				sum1+=(Math.abs(arr[i]-arr[N/2-1]));
+				sum2+=(Math.abs(arr[i]-arr[N/2]));
 			}
-			if(temp<Min) {
-				Min = temp;
-			}
-			temp = 0;
+			if(sum1>sum2)System.out.println(arr[N/2]);
+			else System.out.println(arr[N/2-1]);
 		}
-		System.out.println(Min);
+		else System.out.println(arr[N/2]);
 	}
 
 }
