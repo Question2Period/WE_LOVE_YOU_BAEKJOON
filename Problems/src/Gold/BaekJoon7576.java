@@ -8,7 +8,7 @@ public class BaekJoon7576 { //무조건 다시풀기. 왜 bfs인가? 토마토�
 	static int x,y;
 	static int[][] map;
 	static boolean[][] visited;
-	static Queue<dot> tomato = new LinkedList<dot>();
+	static Queue<dott> tomato = new LinkedList<dott>();
 	static int day = 0;
 	static boolean flag = true;
 
@@ -29,7 +29,7 @@ public class BaekJoon7576 { //무조건 다시풀기. 왜 bfs인가? 토마토�
 			for(int k=0; k<y; k++) {
 				map[j][k] = Integer.parseInt(st.nextToken());
 				if(map[j][k] == 1) {
-					tomato.add(new dot(j,k));
+					tomato.add(new dott(j,k));
 				}
 			}
 
@@ -45,11 +45,11 @@ public class BaekJoon7576 { //무조건 다시풀기. 왜 bfs인가? 토마토�
 		check();
 	}
 
-	static void bfs(Queue<dot> tomato) {
+	static void bfs(Queue<dott> tomato) {
 		int size = tomato.size();
 
 		for(int i=0; i<size; i++) {
-			dot d = tomato.poll();
+			dott d = tomato.poll();
 			int x1 = d.x;
 			int y1 = d.y;
 
@@ -58,7 +58,7 @@ public class BaekJoon7576 { //무조건 다시풀기. 왜 bfs인가? 토마토�
 				int y2 = y1 + dy[j];
 				if( x2>=0 && x2<x && y2>=0 && y2<y && map[x2][y2] == 0) {
 					map[x2][y2] = 1;
-					tomato.add(new dot(x2,y2));
+					tomato.add(new dott(x2,y2));
 				}
 			}
 		}
@@ -81,11 +81,11 @@ public class BaekJoon7576 { //무조건 다시풀기. 왜 bfs인가? 토마토�
 	}
 }
 
-class dot {
+class dott {
 	int x;
 	int y;
 
-	public dot(int x,int y) {
+	public dott(int x,int y) {
 		this.x = x;
 		this.y = y;
 	}
