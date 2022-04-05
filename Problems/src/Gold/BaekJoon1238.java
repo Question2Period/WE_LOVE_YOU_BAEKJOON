@@ -69,15 +69,9 @@ public class BaekJoon1238 {
 			Node node = pq.poll();
 			int location = node.No;
 			int cost = node.cost;
-//			int look = distance[location];
-//			int size = map.get(location).size();
 			if(cost!=distance[location])continue;
 			for(int i = 0; i<map.get(location).size(); i++) {
 				Node dot = map.get(location).get(i);
-//				int a = dot.No;
-//				int b = dot.cost;
-//				int c = distance[dot.No];
-//				int d = distance[location]+dot.cost;
 				if(distance[dot.No]<=distance[location]+dot.cost)continue;
 				distance[dot.No] = distance[location]+dot.cost;
 				pq.offer(new Node(dot.No,distance[dot.No]));
