@@ -29,11 +29,10 @@ public class BaekJoon17135 {
 		if(cur==3) {
 			for(int i =1; i<=N+1;i++) 
 				for(int j= 1; j<=M; j++) map[i][j] = mapcopy[i][j];
-				
-			
-			max = Math.max(battle(), max);
+			//전투 시뮬레이션 돌릴 배열 복사
+			max = Math.max(battle(), max); //각 위치마다 잡을 수 있는 최대 적 구하기
 		}
-		for(int i = start; i<=M; i++) {
+		for(int i = start; i<=M; i++) { // 조합
 			mapcopy[N+1][i]++;
 			archor(cur+1,i+1);
 			mapcopy[N+1][i]--;
@@ -41,17 +40,17 @@ public class BaekJoon17135 {
 	}
 	
 	public static int battle() {
-		int kills = 0;
-		while(true) {//적이 끝까지 다 도달해서 적이없음 종료
+		int kills = 0; // 잡은 적의 수
+		while(true) {
 			if(checkfield())break;//필드에 적이 없을 경우 종료
 			for(int i = 1; i<=M; i++) {
-				if(map[N+1][i]==0)continue;
-				kills+=attack(N+1,i);
+				if(map[N+1][i]==0)continue; // 궁수가 없는 타워일시 패스
+				kills+=attack(N+1,i);//현재 궁수가 잡을 수 있는 값 찾아서 더해주기
 			}
-			pushed();
+			pushed(); //모든 궁수가 화살 쏜 후 적 한칸씩 이동. 배열 1칸씩 아래로 밀기
 		}
 		
-		return kills;
+		return kills; 
 	}
 	
 	public static boolean checkfield() { //필드에 적이 있는지 검사
@@ -59,7 +58,7 @@ public class BaekJoon17135 {
 		for(int i = 1;i<=N; i++) {
 			for(int j= 1; j<=M; j++) {
 				if(map[i][j]==1)TF= false;
-				else if(map[i][j]==3)map[i][j]=0;
+				else if(map[i][j]==3)map[i][j]=0; //3으로 마킹해놓은 적 죽이기
 				
 			}
 		}
@@ -72,12 +71,12 @@ public class BaekJoon17135 {
 		int x = enemy[0];
 		int y = enemy[1];
 		if(x==-1&&y==-1)return 0;
-		if(map[x][y]==1) {//지운 후 카운트
-			map[x][y]=3;
-			return 1;
+		if(map[x][y]==1) {//최초 적 제거
+			map[x][y]=3;//0으로 만들면 겹쳤을때 문제 생기므로 3으로 마킹
+			return 1;//제거 횟수 카운트
 		}
-		else if(map[x][y]==3)return 0;
-		else return 0; // 이미 누군가 지웠다면 카운트 x
+		else if(map[x][y]==3)return 0; // 이미 같은 적을 누군가 쐇으므로 카운트x
+		else return 0; 
 	}
 	
 	public static void pushed() {//배열 밀기~
@@ -96,7 +95,6 @@ public class BaekJoon17135 {
 		for(int i =1;i<=N; i++) {
 			for(int j = 1; j<=M; j++) {
 				if(map[i][j]==0)continue; // 적이 없다면 지나친다.
-//				if(map[i][j]==3)continue;
 				int si = getdistance(a,b,i,j); //거리 구해오기
 				if(si>D)continue;//거리 제한보다 적이 멀리있으면 패스
 				if(si<dist) {//거리가 더 짧을 경우 정보 갱신
