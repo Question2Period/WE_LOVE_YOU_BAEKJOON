@@ -50,7 +50,7 @@ public class BaekJoon11779 {
 		dijstra_inverse();
 		System.out.println(result.size()+2);
 		System.out.print(start+" ");
-		for(int i =0; i<result.size(); i++)System.out.print(result.get(i)+" ");
+		for(int i =result.size()-1; i>=0; i--)System.out.print(result.get(i)+" ");
 		System.out.println(end);
 	}
 	
