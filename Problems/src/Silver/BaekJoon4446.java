@@ -13,21 +13,9 @@ public class BaekJoon4446 {
 		for(int i= 0; i<20; i++) {
 			c[i]-='a';
 		}
-		String str;
-		System.out.println(1);
-		while(true){
-			str = br.readLine();
-			if(str==null)break;
-			int leng = str.length();
-			int fi = 0;
-			if(leng>=2) {
-			if(str.substring(leng-2, leng-1).equals("\n")) {
-				leng-=2;
-				fi = -1;
-			}
-			}
-			
-		for(int i = 0; i<leng; i++) {
+		String str="";
+		while((str=br.readLine())!=null){	
+		for(int i = 0; i<str.length(); i++) {
 			int after = 0;
 			int cur = str.charAt(i);
 			if(cur>=65&&cur<=90) {
@@ -61,7 +49,7 @@ public class BaekJoon4446 {
 				}
 			}
 		}
-		if(fi==-1)System.out.println("\n");
+		System.out.print("\n");
 		}
 		
 	}
