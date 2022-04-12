@@ -15,17 +15,12 @@ public class SWEA5607 {
 		for(int i =2; i<=1000000; i++)factorial[i] = (factorial[i-1]*i)%Mod;
 		for(int t = 1; t<=T; t++) {
 			ans = 0;
-			temp = 0;
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
 			R = Integer.parseInt(st.nextToken());
-			long a= factorial[R]%Mod;
-			long b= factorial[N-R]%Mod;
-			long x = a*b;
-			
+			long x = (factorial[R]*factorial[N-R])%Mod;
 			ans = ferma(x,Mod-2);
-			ans = (factorial[N]*ans)%Mod;
-			sb.append("#"+t+" "+ans);
+			sb.append("#"+t+" "+(ans*factorial[N])%Mod);
 		}
 		System.out.println(sb);
 	}
