@@ -47,11 +47,13 @@ public class BaekJoon9205 {
 			ex = Integer.parseInt(st.nextToken());
 			ey = Integer.parseInt(st.nextToken());
 				pq.offer(new point(ex,ey));
+				if(manhaton(start,new point(ex,ey))<=1000)System.out.println("happy");
+				else {
 			while(!pq.isEmpty()) {
 				pq.offer(pq.poll()); 
 				//start가 바뀌었거나 (ex,ey)가 들어오기전에 큐에넣었을경우 대비 큐 업데이트
 				point cur = pq.poll();//가장 가까운 지점 cur선언
-				System.out.println(cur.x+" "+cur.y);
+//				System.out.println(cur.x+" "+cur.y);
 				if(manhaton(start,cur)>1000) {//가장 가까운 정점이 1000보다 멀면 sad
 					flag=-1;
 					break;
@@ -61,7 +63,9 @@ public class BaekJoon9205 {
 				start.y = cur.y;//출발점을 가장 가까운 정점정보로 업데이트
 			}
 			if(flag==0)System.out.println("happy");
-			else System.out.println("sad");
+			else
+				System.out.println("sad");
+				}
 		}
 	}
 
